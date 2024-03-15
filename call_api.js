@@ -19,6 +19,26 @@ function cc_onStart() {
     buttonContainer.appendChild(delStudent);
 }
 
+async function getData() {
+    let storedData = null;
+    fetch("https://localhost:7141/api/Students")
+        .then(res => res.json())
+        .then(data => {
+            console.log(data);
+            storedData = data;
+        })
+        .catch(err => console.error(err, 'Failed retrieve data.'));
+    return JSON.parse(storedData);
+}
+
+function cc_onDataCreation() {
+    const data = getData();
+    if (data === null || typeof data !== "object") {
+        throw new ReferenceError;
+    }
+
+}
+
 function main() {
     cc_onStart();
 }
