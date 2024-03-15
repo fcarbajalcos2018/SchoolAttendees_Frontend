@@ -26,18 +26,14 @@ async function getData() {
     return data;
 }
 
-async function cc_onDataCreation() {
-    const data = await getData();
+function cc_onDataCreation() {
+    const data = getData();
     if (data === null || typeof data !== "object") {
         throw new ReferenceError;
     }
-    const listContainer = document.querySelector('.student_list');
     console.log('Data:', data);
     for (const student of data) {
         console.log(student);
-        const card = document.createElement('div');
-        card.textContent = student.sname + ' ' + student.ssurn;
-        listContainer.appendChild(card);
     }
 }
 

@@ -1,0 +1,41 @@
+[1mdiff --git a/call_api.js b/call_api.js[m
+[1mindex 48d7318..fa8557c 100644[m
+[1m--- a/call_api.js[m
+[1m+++ b/call_api.js[m
+[36m@@ -20,23 +20,25 @@[m [mfunction cc_onStart() {[m
+ }[m
+ [m
+ async function getData() {[m
+[31m-    let storedData = null;[m
+[31m-    fetch("https://localhost:7141/api/Students")[m
+[31m-        .then(res => res.json())[m
+[31m-        .then(data => {[m
+[31m-            console.log(data);[m
+[31m-            storedData = data;[m
+[31m-        })[m
+[31m-        .catch(err => console.error(err, 'Failed retrieve data.'));[m
+[31m-    return JSON.parse(storedData);[m
+[32m+[m[32m    const resp = await fetch("https://localhost:7141/api/Students")[m
+[32m+[m[32m    const data = await resp.json();[m
+[32m+[m[32m    console.log(data);[m
+[32m+[m[32m    return data;[m
+ }[m
+ [m
+[31m-function cc_onDataCreation() {[m
+[31m-    const data = getData();[m
+[32m+[m[32masync function cc_onDataCreation() {[m
+[32m+[m[32m    const data = await getData();[m
+     if (data === null || typeof data !== "object") {[m
+         throw new ReferenceError;[m
+     }[m
+[32m+[m[32m    const listContainer = document.querySelector('.student_list');[m
+     console.log('Data:', data);[m
+[32m+[m[32m    for (const student of data) {[m
+[32m+[m[32m        console.log(student);[m
+[32m+[m[32m        const card = document.createElement('div');[m
+[32m+[m[32m        card.textContent = student.sname + ' ' + student.ssurn;[m
+[32m+[m[32m        listContainer.appendChild(card);[m
+[32m+[m[32m    }[m
+ }[m
+ [m
+ function main() {[m

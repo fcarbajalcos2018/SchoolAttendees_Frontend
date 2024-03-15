@@ -37,7 +37,6 @@ async function cc_onDataCreation() {
         console.log(student);
         const card = document.createElement('div');
         card.textContent = student.sname + ' ' + student.ssurn;
-        listContainer.appendChild(card);
     }
 }
 

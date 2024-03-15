@@ -23,21 +23,17 @@ async function getData() {
     const resp = await fetch("https://localhost:7141/api/Students")
     const data = await resp.json();
     console.log(data);
-    return data;
+    return JSON.parse(data);
 }
 
-async function cc_onDataCreation() {
-    const data = await getData();
+function cc_onDataCreation() {
+    const data = getData();
     if (data === null || typeof data !== "object") {
         throw new ReferenceError;
     }
-    const listContainer = document.querySelector('.student_list');
     console.log('Data:', data);
     for (const student of data) {
         console.log(student);
-        const card = document.createElement('div');
-        card.textContent = student.sname + ' ' + student.ssurn;
-        listContainer.appendChild(card);
     }
 }
 
