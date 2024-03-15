@@ -36,10 +36,11 @@ function cc_onDataCreation() {
     if (data === null || typeof data !== "object") {
         throw new ReferenceError;
     }
-
+    console.log('Data:', data);
 }
 
 function main() {
     cc_onStart();
+    cc_onDataCreation();
 }
 main();
